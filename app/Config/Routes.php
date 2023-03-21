@@ -21,7 +21,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -32,7 +32,7 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/', 'Bootstrap::index');
+// $routes->get('/', 'Bootstrap::index');
 $routes->get('/coba', function () {
     echo 'Hello World';
 });
@@ -52,9 +52,20 @@ $routes->group(
         $r->get('master', 'Admin\Master::index');
     }
 );
-$routes->get('/', 'Tugas::index');
-$routes->get('/', 'Tugaskelas::index');
-$routes->get('/', 'Home::index');
+// $routes->get('/', 'Tugas::index');
+// $routes->get('/', 'Tugaskelas::index');
+$routes->get('/Tugas', 'Unguided::index');
+$routes->get('/Tugas2', 'Home::unguided2');
+
+$routes->get('/book', 'Book::index');
+$routes->get('/book/create', 'Book::create');
+$routes->post('/book/create', 'Book::save');
+$routes->get('/book/(:any)', 'Book::detail/$1');
+
+$routes->get('/komik', 'Komik::index');
+$routes->get('/komik/create', 'Komik::create');
+$routes->post('/komik/create', 'Komik::save');
+$routes->get('/komik/(:any)', 'Komik::detail/$1');
 
 /*
  * --------------------------------------------------------------------
