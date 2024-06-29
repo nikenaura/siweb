@@ -6,6 +6,9 @@ class Unguided extends BaseController
 {
     public function index()
     {
-        return view('Container');
+        $data = [
+            'title' => 'Tugas Container'
+        ];
+        return view('Container', $data);
     }
 }

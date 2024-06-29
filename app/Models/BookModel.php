@@ -16,11 +16,14 @@ class BookModel extends Model
         'title', 'slug', 'author', 'release_year', 'price', 'discount',
         'stock', 'cover', 'book_category_id'
     ];
+    protected $useSoftDeletes = true;
+
 
     public function getBook($slug = false)
     {
         $query = $this->table('book')
-            ->join('book_category', 'book_category_id');
+            ->join('book_category', 'book_category_id')
+            ->where('deleted_at is null');
         
         if ($slug == false)
             return $query->get()->getResultArray();

@@ -23,11 +23,14 @@
             </div>
             <div class="card-body">
                 <a class="btn btn-primary mb-3" type="button" href="<?= base_url('book/create') ?>">Tambah Buku</a>
+                <a class="btn btn-dark mb-3" type="button" data-bs-target="#modalImport"
+                data-bs-toggle="modal">Import Buku</a>
                 <!-- Tabel Buku -->
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Cover</th>
                             <th>Judul</th>
                             <th>Kategori</th>
                             <th>Harga</th>
@@ -40,13 +43,23 @@
                         foreach ($result as $value) : ?>
                             <tr>
                                 <td><?= $no++ ?></td>
+                                <td>
+                                    <img src="img/<?= $value['cover'] ?>" alt="" width="100">
+                                </td>
                                 <td><?= $value['title'] ?></td>
                                 <td><?= $value['name_category'] ?></td>
                                 <td><?= $value['price'] ?></td>
                                 <td><?= $value['stock'] ?></td>
                                 <td>
-                                    <a class="btn btn-primary" href="<?= base_url('book/' .
-                                    $value['slug']) ?>" role="button">Detail</a>
+                                    <a class="btn btn-primary" href="<?= base_url('book/' . $value['slug']) ?>" role="button">Detail</a>
+                                    <a class="btn btn-warning" href="<?= base_url('book/edit/' . $value['slug']) ?>" role="button">Ubah</a>
+                                    <form action="<?= base_url('book/' . $value['book_id']
+                                    ) ?>" method="post" class="d-inline">
+                                    <?= csrf_field() ?>
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-danger"
+                                    role="button" onclick="return confirm('Apakah Anda yakin?')">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -56,4 +69,5 @@
         </div>
     </div>
 </main>
+<?= $this->include('book/modal') ?>
 <?= $this->endSection() ?>

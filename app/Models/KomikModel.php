@@ -16,11 +16,13 @@ class KomikModel extends Model
         'judul', 'slug', 'tahun_rilis', 'penulis', 'harga', 'diskon',
         'stok', 'cover', 'komik_category_id'
     ];
+    protected $useSoftDeletes = true;
 
     public function getKomik($slug = false)
     {
         $query = $this->table('komik')
-            ->join('komik_category', 'komik_category_id');
+            ->join('komik_category', 'komik_category_id')
+            ->where('deleted_at is null');
         
         if ($slug == false)
             return $query->get()->getResultArray();

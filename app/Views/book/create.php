@@ -16,7 +16,7 @@
             </div>
             <div class="card-body">
                 <!-- Form Tambah Buku -->
-                <form action="<?= base_url('book/create') ?>" method="POST">
+                <form action="<?= base_url('book/create') ?>" method="POST" enctype="multipart/form-data">
                     <?= csrf_field() ?>
                     <div class="mb-3 row">
                         <label for="title" class="col-sm-2 col-form-label">Judul</label>
@@ -66,15 +66,25 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="book_category_id" class="col-sm-2 col-form-label">Kategori</label>
-                        <div class="col-sm-3">
-                            <select type="text" class="form-control" id="book_category_id" name="book_category_id">
-                                <?php foreach ($category as $value) : ?>
-                                    <option value="<?= $value['book_category_id'] ?>">
-                                        <?= $value['name_category'] ?> </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                        <label for="cover" class="col-sm-2 col-form-label">Cover</label>
+                            <div class="col-sm-5">
+                                <input type="file" class="form-control <?= $validation->hasError('cover') ? 'is-invalid' : '' ?>" id='cover' name='cover'>
+                                <div id="validationServer03Feedback" class="invalid-feedback">
+                                    <?= $validation->getError('cover') ?>
+                                </div>
+                                <div class="col-sm-6 mt-2">
+                                    <img src="/img/default.jpg" alt="" class="img-thumbnail img-preview">
+                                </div>
+                            </div>
+                            <label for="book_category_id" class="col-sm-2 col-form-label">Kategori</label>
+                            <div class="col-sm-3">
+                                <select type="text" class="form-control" id="book_category_id" name="book_category_id">
+                                    <?php foreach ($category as $value) : ?>
+                                        <option value="<?= $value['book_category_id'] ?>">
+                                            <?= $value['name_category'] ?> </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
                     </div>
                     <div class="d-grip gap-2 d-md-flex justify-content-md-end">
                         <button class="btn btn-primary" type="submit">Simpan</button>

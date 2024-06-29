@@ -9,7 +9,6 @@
                 Pengelolaan Data Komik
             </li>
         </ol>
-        <!-- Start Flash Data -->
         <?php if (session()->getFlashdata('msg')) : ?>
             <div class="alert alert-success" role="alert">
                 <?= session()->getFlashdata('msg') ?>
@@ -23,6 +22,8 @@
             </div>
             <div class="card-body">
                 <a class="btn btn-primary mb-3" type="button" href="<?= base_url('komik/create') ?>">Tambah Komik</a>
+                <a class="btn btn-dark mb-3" type="button" data-bs-target="#modalImport"
+                data-bs-toggle="modal">Import Komik</a>
                 <!-- Tabel Komik -->
                 <table id="datatablesSimple">
                     <thead>
@@ -41,7 +42,9 @@
                         foreach ($result as $value) : ?>
                             <tr>
                                 <td><?= $no++ ?></td>
-                                <td></td>
+                                <td>
+                                    <img src="img/<?= $value['cover'] ?>" alt="" width="100">
+                                </td>
                                 <td><?= $value['judul'] ?></td>
                                 <td><?= $value['name_category'] ?></td>
                                 <td><?= $value['harga'] ?></td>
@@ -49,6 +52,14 @@
                                 <td>
                                     <a class="btn btn-primary" href="<?= base_url('komik/' .
                                     $value['slug']) ?>" role="button">Detail</a>
+                                    <a class="btn btn-warning" href="<?= base_url('komik/edit/' . $value['slug']) ?>" role="button">Ubah</a>
+                                    <form action="<?= base_url('komik/' . $value['komik_id']
+                                    ) ?>" method="post" class="d-inline">
+                                    <?= csrf_field() ?>
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-danger"
+                                    role="button" onclick="return confirm('Apakah Anda yakin?')">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -58,4 +69,5 @@
         </div>
     </div>
 </main>
+<?= $this->include('komik/modal') ?>
 <?= $this->endSection() ?>

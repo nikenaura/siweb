@@ -35,11 +35,12 @@ class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['auth', 'number'];
 
     /**
      * Constructor.
      */
+    protected $defaultImage;
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
         // Do Not Edit This Line
@@ -49,5 +50,6 @@ class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
         session();
+        $this->defaultImage = 'default.jpg';
     }
 }

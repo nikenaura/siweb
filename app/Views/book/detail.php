@@ -17,20 +17,21 @@
             <div class="card-body">
                 <!-- Isi Detail -->
                 <div class="card mb-3">
-                    <div class="col-md-4">
-                        <img src="https://cdn.pixabay.com/photo/2017/01/31/00/09/book-2022464_960_720.png"
-                        alt="" width="50%">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $result['title'] ?></h5>
-                            <p class="card-text">Penulis:<br><?= $result['author'] ?></p>
-                            <p class="card-text">Tahun Rilis: <?= $result['release_year'] ?></p>
-                            <p class="card-text">Stok: <?= $result['stock'] ?></p>
-                            <p class="card-text">Harga: <?= $result['price'] ?></p>
-                            <p class="card-text">Diskon: <?= $result['discount'] ?></p>
-                            <div class="d-grip gap-2 d-md-block">
-                                <a class="btn btn-dark" type="button" href="<?= base_url('book') ?>">Kembali</a>
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="<?= base_url('img/' . $result['cover']) ?>" alt="" width="70%">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $result['title'] ?></h5>
+                                <p class="card-text">Penulis:<br><?= $result['author'] ?></p>
+                                <p class="card-text">Tahun Rilis: <?= $result['release_year'] ?></p>
+                                <p class="card-text">Stok: <?= $result['stock'] ?></p>
+                                <p class="card-text">Harga: <?= $result['price'] ?></p>
+                                <p class="card-text">Diskon: <?= $result['discount'] ?></p>
+                                <div class="d-grip gap-2 d-md-block">
+                                    <a class="btn btn-dark" type="button" href="<?= base_url('book') ?>">Kembali</a>
+                                </div>
                             </div>
                         </div>
                     </div>
